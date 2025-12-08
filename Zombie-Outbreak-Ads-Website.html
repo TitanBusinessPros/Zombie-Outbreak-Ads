@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Outbreak Honolulu - In-Game Advertising</title>
+    <link rel="icon" href="https://github.com/TitanBusinessPros/Zombie-Outbreak-Honolulu/raw/main/ZOH-Favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0f1e;
+            color: #f0f0f0;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(28, 58, 28, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(88, 28, 28, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(10, 15, 30, 0.9);
+            border-bottom: 2px solid #2a5c2a;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 70px;
+            width: auto;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background: linear-gradient(rgba(10, 15, 30, 0.8), rgba(10, 15, 30, 0.9)), 
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid #2a5c2a;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Game Images Section - COMPLETELY REDESIGNED for full images */
+        .game-images-container {
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .game-images-title {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .game-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .character-container {
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        .character-image {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.7));
+            transition: transform 0.3s ease, filter 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        .character-image:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.9));
+        }
+        
+        .character-name {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #FF9800;
+            font-weight: bold;
+        }
+        
+        /* Ad Options Section */
+        .ad-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        @media (max-width: 1100px) {
+            .ad-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .ad-option {
+            background-color: rgba(20, 30, 48, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid #2a5c2a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ad-option:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #4CAF50, #2a5c2a);
+        }
+        
+        .ad-option h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        
+        .ad-option .price {
+            font-size: 1.5rem;
+            color: #FF9800;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .ad-option .highlight {
+            background-color: rgba(76, 175, 80, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+            margin: 20px 0;
+        }
+        
+        .ad-option ul {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+        
+        .ad-option li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .ad-option li:before {
+            content: "✓";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50, #2a5c2a);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #FF9800, #cc7a00);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
+        }
+        
+        .spots-left {
+            display: inline-block;
+            background-color: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(10, 15, 30, 0.95);
+            border-top: 2px solid #2a5c2a;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info i {
+            color: #4CAF50;
+            width: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #4CAF50;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .ad-option {
+                padding: 20px;
+            }
+            
+            .ad-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-images {
+                gap: 20px;
+            }
+            
+            .character-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://github.com/TitanBusinessPros/Zombie-Outbreak-Honolulu/raw/main/ZOH-Logo-real.png" alt="Zombie Outbreak Honolulu Logo">
+                <div class="logo-text">
+                    <h1>Zombie Outbreak Honolulu</h1>
+                    <p>Advertising Opportunities</p>
+                </div>
+            </div>
+            <div class="header-contact">
+                <p><i class="fas fa-envelope"></i> titanbusinesspros@gmail.com</p>
+                <p><i class="fas fa-phone"></i> 405-998-7979</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Advertise in Hawaii's Hottest Zombie Game</h2>
+            <p>Reach thousands of players by placing your business directly in the Zombie Outbreak Honolulu video game. Choose from two powerful advertising opportunities that put your brand in front of engaged gamers.</p>
+            
+            <!-- Game character images - COMPLETELY REDESIGNED for full visibility -->
+            <div class="game-images-container">
+                <h3 class="game-images-title">Meet Some of Honolulu's Zombie Threats</h3>
+                <div class="game-images">
+                    <div class="character-container">
+                        <img src="https://github.com/TitanBusinessPros/Zombie-Outbreak-Honolulu/raw/main/Boss-13.png" 
+                             alt="Zombie Santa Boss" 
+                             class="character-image">
+                        <div class="character-name">Zombie Santa Claus</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">Throws coconut bombs at players</p>
+                    </div>
+                    <div class="character-container">
+                        <img src="https://github.com/TitanBusinessPros/Zombie-Outbreak-Honolulu/raw/main/Boss-3.png" 
+                             alt="Stage 1 Zombie" 
+                             class="character-image">
+                        <div class="character-name">Stage 1 Zombie</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">One of the first zombies players encounter</p>
+                    </div>
+                    <div class="character-container">
+                        <img src="https://github.com/TitanBusinessPros/Zombie-Outbreak-Honolulu/raw/main/Zombie-11.png" 
+                             alt="Banana Tree Zombie" 
+                             class="character-image">
+                        <div class="character-name">Banana Tree Zombie</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">A tropical plant turned undead</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h2 style="text-align: center; margin: 40px 0 30px; color: #4CAF50;">Advertising Options</h2>
+        
+        <div class="ad-options">
+            <!-- Ad Option 1 -->
+            <div class="ad-option">
+                <h3>Building Placement in Game</h3>
+                <div class="price">Pay What You Want</div>
+                
+                <p>Get your Honolulu business building added directly to the game environment. Players will see your actual company building as they navigate through the zombie-infested streets of Honolulu.</p>
+                
+                <div class="highlight">
+                    <strong>Perfect for:</strong> Restaurants, shops, hotels, and local businesses wanting permanent visibility in the game.
+                </div>
+                
+                <ul>
+                    <li>Your actual building appears in the game world</li>
+                    <li>Permanent placement - no expiration date</li>
+                    <li>Players see your business every time they play</li>
+                    <li>Builds strong local brand recognition</li>
+                    <li>No set price - pay what you think it's worth</li>
+                </ul>
+                
+                <p><strong>Note:</strong> This is an incredible deal - your business will be in the game forever!</p>
+                
+                <a href="https://buy.stripe.com/3cIeVeaRH3gc85Q6Nh7AI0d" class="btn" target="_blank">
+                    <i class="fas fa-building"></i> Add My Building to the Game
+                </a>
+            </div>
+            
+            <!-- Ad Option 2 -->
+            <div class="ad-option">
+                <h3>15-Second Cut Screen Ad</h3>
+                <div class="price">$250 Per Year <span class="spots-left">Only 10 Spots Left</span></div>
+                
+                <p>Secure one of only 10 available ad slots that appear as a 15-second cut screen between game stages. When players complete a level, they'll see your ad before starting the next stage.</p>
+                
+                <div class="highlight">
+                    <strong>Perfect for:</strong> Businesses wanting high-impact, focused attention from engaged players.
+                </div>
+                
+                <ul>
+                    <li>15-second full-screen video/image ad</li>
+                    <li>Appears between game stages</li>
+                    <li>Only 10 slots available - exclusive opportunity</li>
+                    <li>Players are a captive audience during loading</li>
+                    <li>$250 per year - incredible value</li>
+                </ul>
+                
+                <p><strong>Limited Availability:</strong> Only 10 spots total. Once they're gone, they're gone!</p>
+                
+                <a href="https://buy.stripe.com/14A7sM3pfdUQ4TE8Vp7AI0e" class="btn btn-secondary" target="_blank">
+                    <i class="fas fa-tv"></i> Reserve My Ad Slot - $250/Year
+                </a>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 50px 0; padding: 30px; background-color: rgba(20, 30, 48, 0.6); border-radius: 10px;">
+            <h3 style="color: #4CAF50; margin-bottom: 20px;">Why Advertise in Zombie Outbreak Honolulu?</h3>
+            <p style="max-width: 800px; margin: 0 auto;">Our players are engaged, dedicated, and primarily based in the Honolulu area. Unlike traditional ads that get ignored, in-game advertising creates memorable brand experiences. Your business becomes part of the gameplay itself, leading to stronger brand recall and customer loyalty.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> titanbusinesspros@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> 405-998-7979</p>
+                        <p><i class="fas fa-globe"></i> www.okiewebsiteguy.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Honolulu, Hawaii</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>About the Game</h3>
+                    <p>Zombie Outbreak Honolulu is an action-packed video game set in the beautiful but zombie-infested streets of Honolulu. Players fight to survive against unique Hawaiian-themed zombies while exploring realistic Honolulu locations.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow us on social media for game updates and advertising opportunities.</p>
+                    <div class="social-links">
+                        <!-- Only Facebook icon as requested -->
+                        <a href="https://www.facebook.com/TitanBusinessPros/" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Zombie Outbreak Honolulu - All Rights Reserved | Titan Business Pros</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple counter for spots left
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update spots left randomly to simulate limited availability
+            const spotsElement = document.querySelector('.spots-left');
+            let spots = 10;
+            
+            // Set initial spots text
+            spotsElement.textContent = `Only ${spots} Spots Left`;
+            
+            setInterval(() => {
+                // Randomly decrease spots every 10 seconds (for demo purposes)
+                if (spots > 3 && Math.random() > 0.7) {
+                    spots--;
+                    spotsElement.textContent = `Only ${spots} Spots Left`;
+                }
+            }, 10000);
+        });
+    </script>
+</body>
+</html>
